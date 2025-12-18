@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Biblioteca_simples
 =======
 # 📚 Gestão de Biblioteca Full-Stack
@@ -96,4 +96,3 @@ Projeto de estudo e portfólio para desenvolvimento **Full-Stack**.
 
 Se você gostou do projeto ou tem sugestões, fique à vontade para contribuir ⭐
 
->>>>>>> develop
