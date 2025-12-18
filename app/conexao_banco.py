@@ -1,6 +1,5 @@
 import psycopg2
 import os
-#from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
 from psycopg2 import Error
 

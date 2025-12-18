@@ -11,7 +11,7 @@ CREATE TABLE usuarios(
     email VARCHAR(80) UNIQUE NOT NULL,
     data_nascimento DATE NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
-    tipo_usuario usuario_enum DEFAULT 'usuario' NOT NULL,
+    tipo_usuario usuario_enum  NOT NULL DEFAULT 'usuario',
     data_conta_criada TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 

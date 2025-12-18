@@ -1,14 +1,11 @@
-from flask import Flask, request, redirect, url_for, render_template, flash
+from flask import Blueprint, request, redirect, url_for, render_template, flash
 from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError, VerificationError, InvalidHash
+from argon2.exceptions import VerifyMismatchError, VerificationError
 from psycopg2.extras import RealDictCursor
-from conexao_banco import conecta_banco, encerra_conexao
-from processar_dados import limpar_e_validar
-
-app = Flask(__name__)
+from .conexao_banco import conecta_banco, encerra_conexao
+from .processar_dados import limpar_e_validar
 
 ph = PasswordHasher()
-
 def iniciar_banco():
 
     global connection  
@@ -19,24 +16,26 @@ def iniciar_banco():
     cursor = connection.cursor()
     cursorDict = connection.cursor(cursor_factory=RealDictCursor)
 
-
 # ==================== ROTAS ==========================#
-@app.get('/')
+
+rotas_bp = Blueprint('rotas_main', __name__, url_prefix='/')
+
+@rotas_bp.get('/')
 def index():
     return render_template('index.html')
 
 
-@app.get('/login_biblioteca')
+@rotas_bp.get('/login_biblioteca')
 def pagina_login():
     return render_template('login.html')
 
 
-@app.get('/pagina_user')
+@rotas_bp.get('/pagina_user')
 def pagina_user():
     return render_template('user.html')
 
 
-@app.post('/cadastrar')
+@rotas_bp.post('/cadastrar')
 def processar_cadastro():
     try:
         iniciar_banco()
@@ -58,32 +57,33 @@ def processar_cadastro():
         connection.commit()
 
         encerra_conexao(connection)
-        print("Dados enviados!")
-
-        return redirect(url_for('login_biblioteca'), code=303)
+        print("<<<Dados enviados para o banco>>>")
+        flash("Cadastro realizado com sucesso!", "success")
+        return redirect(url_for('rotas_main.pagina_login'), code=303)
     
     except Exception as e:
-        return f"[ERROR- Final cadastro] {e}", 500
+        return f"[ERROR- Final cadastro] | {e}", 500
     
 
-@app.post('/login')
+
+@rotas_bp.post('/login')
 def processar_login():
     iniciar_banco()
     email = (request.form.get('email') or '').strip()
     senha = (request.form.get('senha') or '').strip()
 
     if not email or not senha:
-        flash('Email ou senha inválidos.')
-        return redirect(url_for('login_biblioteca'))
-    
+        flash('Email ou senha inválidoadaçld', "error")
+        #return redirect(url_for('rotas_main.pagina_login'))
+
     try:
         with cursorDict:
                     cursorDict.execute("SELECT email, senha_hash FROM usuarios WHERE email = %s", (email,))
                     usuario = cursorDict.fetchone()
 
         if not usuario:
-            flash('Email ou senha inválidos.')
-            return redirect(url_for('login_biblioteca'))
+            flash('Email ou senha inválidos.', "error")
+            return redirect(url_for('rotas_main.pagina_login'))
         
     
         senha_hash = usuario['senha_hash']
@@ -91,13 +91,14 @@ def processar_login():
         try:
             ph.verify(senha_hash, senha)
             print("<< Senha válida >>")
-            return redirect(url_for('pagina_user'))
+            flash('Login efetuado!', "success")
+            return redirect(url_for('rotas_main.pagina_user'))
         
         except (VerifyMismatchError, VerificationError):
             print(f"<<< Senha inválida >>>")
-            flash('Email ou senha inválidos.')
-            return redirect(url_for('login_biblioteca'))
-
+            flash('Email ou senha inválidos.', "error")
+            return redirect(url_for('rotas_main.pagina_login'))
+        
         
 
     except Exception as e:
