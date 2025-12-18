@@ -1,6 +1,3 @@
-
-# Biblioteca_simples
-=======
 # 📚 Gestão de Biblioteca Full-Stack
 
 Uma **mini aplicação web full-stack** desenvolvida com o objetivo de colocar em prática o **fluxo completo de desenvolvimento de software**, abrangendo **Front-End, Back-End e Banco de Dados**.
