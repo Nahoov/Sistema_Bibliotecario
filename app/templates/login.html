@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block conteudo %}
+    <h1>LOGIN</h1>
+
+    <div>
+        <form action="/login" method="POST">
+            <div>
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email" placeholder="Digite seu email" requiered>
+            </div>
+
+            <div> 
+                <label for="senha">Senha</label><br>
+                <input type="text" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div> 
+
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
+
+        </form>
+    </div>
+
+    {% endblock %}
+    
+</body>
+</html>
