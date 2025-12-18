@@ -1,53 +1,95 @@
-Gestão de Biblioteca Full-Stack
-É uma mini aplicação web desenvolvida para colocar em prática o fluxo completo de desenvolvimento de software (do Front, Back até o banco de dados). 
-O projeto abrange desde a modelagem de dados e criação de uma API própria até o consumo de dados externos e a construção de uma interface responsiva.
+# 📚 Gestão de Biblioteca Full-Stack
 
-🎯 Objetivo do Projeto
-O foco principal deste repositório é o aprendizado técnico e a compreensão do ciclo de vida de uma aplicação:
+Uma **mini aplicação web full-stack** desenvolvida com o objetivo de colocar em prática o **fluxo completo de desenvolvimento de software**, abrangendo **Front-End, Back-End e Banco de Dados**.
 
-- Construção de uma API RESTful do zero.
+O projeto envolve desde a **modelagem de dados**, criação de uma **API própria**, controle de autenticação e permissões, até o **consumo de uma API externa** e a construção de uma interface preparada para uso real.
 
-- Implementação de níveis de acesso (Admin vs. Usuário).
+---
 
-- Consumo da API pública Open Library para enriquecer o catálogo.
+## 🎯 Objetivo do Projeto
 
-- Gerenciamento de estado no Front-End e persistência de dados no Back-End.
+O foco principal deste repositório é o **aprendizado técnico** e a compreensão do **ciclo de vida de uma aplicação web**, incluindo:
 
-🛠️ Funcionalidades
-👤 Perfil: Usuário Comum: 
-   - Consulta de Acervo: Visualizar e pesquisar livros disponíveis na biblioteca.
+* Construção de uma **API RESTful** do zero
+* Implementação de **níveis de acesso** (Administrador e Usuário)
+* Consumo da API pública **Open Library** para enriquecer o catálogo
+* Gerenciamento de estado no Front-End
+* Persistência de dados no Back-End
+* Integração entre diferentes camadas da aplicação
 
-  - Visualização de Detalhes: Ver informações detalhadas consumidas via Open Library.
+---
 
-🛡️ Perfil: Administrador (ADM)
-  - Gestão de Livros: Adicionar, editar e excluir livros do acervo local.
+## 🛠️ Funcionalidades
 
-  - Gestão de Usuários: Cadastro, atualização e remoção de usuários do sistema.
+### 👤 Perfil: Usuário Comum
 
-  - Controle de Empréstimos:  abrir solicitações de empréstimo, registrar a devolução.
+* **Consulta de Acervo**: visualizar e pesquisar livros disponíveis na biblioteca
+* **Visualização de Detalhes**: acessar informações detalhadas dos livros consumidas via Open Library API
 
-📋 Fluxo de Dados
+---
 
-Autenticação: O sistema valida o nível de acesso no login.
+### 🛡️ Perfil: Administrador (ADM)
 
-Requisição: O Front-End solicita dados ao Back-End.
+* **Gestão de Livros**: adicionar, editar e remover livros do acervo local
+* **Gestão de Usuários**: cadastrar, atualizar e excluir usuários do sistema
+* **Controle de Empréstimos**:
 
-Processamento: O Back-End busca informações no Banco de Dados local ou na API da Open Library.
+  * Abrir solicitações de empréstimo
+  * Registrar devoluções
+  * Gerenciar o status dos livros
 
-Resposta: Os dados são tratados e exibidos conforme a permissão do usuário.
+---
 
-🛠️ Tecnologias Utilizadas
-Para garantir robustez e escalabilidade, o projeto utiliza:
+## 📋 Fluxo de Dados da Aplicação
 
-- Linguagem: Python v3
+1. **Autenticação**
+   O sistema valida o login e identifica o nível de acesso do usuário.
 
-- Framework Web (API): Flask
+2. **Requisição**
+   O Front-End envia requisições para a API Back-End.
 
-- Banco de Dados: PostgreSQL (Relacional)
+3. **Processamento**
+   O Back-End processa a requisição, buscando dados no:
 
-- Integração: Open Library API
+   * Banco de Dados local (PostgreSQL)
+   * API externa Open Library
 
-🚀 Como Executar (Em breve)
+4. **Resposta**
+   Os dados são tratados e retornados ao Front-End conforme as permissões do usuário.
 
-✍️ Autor
-Desenvolvido por Nahomi como projeto de estudo e portfólio.
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+Para garantir **robustez**, **organização** e **escalabilidade**, o projeto utiliza:
+
+* **Linguagem:** Python 3
+* **Framework Web (API):** Flask
+* **Banco de Dados:** PostgreSQL (Relacional)
+* **Integração Externa:** Open Library API
+* **Arquitetura:** API REST
+* **Controle de Acesso:** Autenticação com níveis de permissão
+
+---
+
+## 🚀 Como Executar o Projeto
+
+> ⚠️ **Em desenvolvimento** — instruções de execução serão adicionadas em breve.
+
+---
+
+## 📌 Status do Projeto
+
+🚧 Projeto em desenvolvimento, focado em aprendizado e construção de portfólio.
+
+---
+
+## ✍️ Autor
+
+Desenvolvido por **Nahomi**
+Projeto de estudo e portfólio para desenvolvimento **Full-Stack**.
+
+---
+
+Se você gostou do projeto ou tem sugestões, fique à vontade para contribuir ⭐
+
