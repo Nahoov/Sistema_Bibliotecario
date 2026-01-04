@@ -7,6 +7,8 @@ load_dotenv()
 
 senha =os.getenv("senha")
 
+
+
 def conecta_banco():
     try:
         conn = psycopg2.connect(
@@ -26,5 +28,9 @@ def encerra_conexao(conn):
     if conn:
         conn.close()
         print("<< Conexão com o banco ENCERRADA >>")
+
+
+ 
+
 
 

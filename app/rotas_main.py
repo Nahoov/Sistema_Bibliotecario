@@ -3,9 +3,12 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
 from psycopg2.extras import RealDictCursor
 from .conexao_banco import conecta_banco, encerra_conexao
+from flask import session
 from .processar_dados import limpar_e_validar
+from .auth import login_required, admin_required
 
 ph = PasswordHasher()
+
 def iniciar_banco():
 
     global connection  
@@ -31,8 +34,14 @@ def pagina_login():
 
 
 @rotas_bp.get('/pagina_user')
+@login_required
 def pagina_user():
     return render_template('user.html')
+
+@rotas_bp.get('/pagina_admin')
+@admin_required
+def pagina_admin():
+        return render_template('admin.html')
 
 
 @rotas_bp.post('/cadastrar')
@@ -55,31 +64,33 @@ def processar_cadastro():
                                dados_processados['senha_hash']))
 
         connection.commit()
-
         encerra_conexao(connection)
+
         print("<<<Dados enviados para o banco>>>")
+
         flash("Cadastro realizado com sucesso!", "success")
         return redirect(url_for('rotas_main.pagina_login'), code=303)
     
     except Exception as e:
-        return f"[ERROR- Final cadastro] | {e}", 500
+        return f"[ERROR - Final cadastro] | {e}", 500
     
 
 
 @rotas_bp.post('/login')
 def processar_login():
+
     iniciar_banco()
     email = (request.form.get('email') or '').strip()
     senha = (request.form.get('senha') or '').strip()
 
     if not email or not senha:
-        flash('Email ou senha inválidoadaçld', "error")
-        #return redirect(url_for('rotas_main.pagina_login'))
+        flash('Email ou senha inválidos', "error")
+        return redirect(url_for('rotas_main.pagina_login'))
 
     try:
-        with cursorDict:
-                    cursorDict.execute("SELECT email, senha_hash FROM usuarios WHERE email = %s", (email,))
-                    usuario = cursorDict.fetchone()
+        #with cursorDict:
+        cursorDict.execute("SELECT email, senha_hash, tipo_usuario, id_usuario FROM usuarios WHERE email = %s", (email,))
+        usuario = cursorDict.fetchone()
 
         if not usuario:
             flash('Email ou senha inválidos.', "error")
@@ -87,19 +98,31 @@ def processar_login():
         
     
         senha_hash = usuario['senha_hash']
+        tipo_usuario = usuario['tipo_usuario']
 
-        try:
-            ph.verify(senha_hash, senha)
-            print("<< Senha válida >>")
-            flash('Login efetuado!', "success")
-            return redirect(url_for('rotas_main.pagina_user'))
+        print(senha_hash)
+        print("imprime tipo de usuario: ", tipo_usuario)
+
+        ph.verify(senha_hash, senha)
+        print("<< Senha válida >>")
+        flash('Login efetuado!', "success")
+
+        session['id_usuario'] = usuario['id_usuario']
+        session['tipo_usuario'] = tipo_usuario
+        session['email'] = usuario['email']
+
+
+        if tipo_usuario == 'admin':
+            print("É admin")
+            return redirect(url_for('rotas_main.pagina_admin'))
         
-        except (VerifyMismatchError, VerificationError):
+        else:
+            return redirect(url_for('rotas_main.pagina_user'))
+             
+        
+    except (VerifyMismatchError, VerificationError):
             print(f"<<< Senha inválida >>>")
             flash('Email ou senha inválidos.', "error")
             return redirect(url_for('rotas_main.pagina_login'))
         
-        
-
-    except Exception as e:
-        return print(f"[ERROR]: {e}")
+    
