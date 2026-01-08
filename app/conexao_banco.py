@@ -7,8 +7,6 @@ load_dotenv()
 
 senha =os.getenv("senha")
 
-
-
 def conecta_banco():
     try:
         conn = psycopg2.connect(

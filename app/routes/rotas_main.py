@@ -1,11 +1,12 @@
-from flask import Blueprint, request, redirect, url_for, render_template, flash
+from flask import Blueprint, request, redirect, url_for, render_template, flash, current_app
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
 from psycopg2.extras import RealDictCursor
-from .conexao_banco import conecta_banco, encerra_conexao
+from ..conexao_banco import conecta_banco, encerra_conexao
 from flask import session
-from .processar_dados import limpar_e_validar
-from .auth import login_required, admin_required
+from ..processar_dados import limpar_e_validar
+from ..auth import login_required, admin_required
+
 
 ph = PasswordHasher()
 
@@ -107,9 +108,9 @@ def processar_login():
         print("<< Senha válida >>")
         flash('Login efetuado!', "success")
 
-        session['id_usuario'] = usuario['id_usuario']
-        session['tipo_usuario'] = tipo_usuario
-        session['email'] = usuario['email']
+        session[current_app.config["SESSION_USER_ID"]] = usuario["id_usuario"]
+        session[current_app.config["SESSION_USER_ROLE"]] = tipo_usuario
+        session[current_app.config["SESSION_USER_EMAIL"]] = usuario["email"]
 
 
         if tipo_usuario == 'admin':

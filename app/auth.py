@@ -1,7 +1,7 @@
 # Importa a função wraps, usada para preservar os metadados da função original quando criamos um decorator
 from functools import wraps
 
-from flask import session, redirect, url_for, flash
+from flask import session, redirect, url_for, flash, current_app
 # session  -> armazena dados do usuário entre requisições
 # flash -> envia mensagens temporárias para o usuário
 
@@ -13,11 +13,13 @@ from flask import session, redirect, url_for, flash
 def login_required(f):
     # wraps(f) mantém o nome e os metadados da função original
     @wraps(f)
-    def decorated_function(*args, **kwargs):
+    def wrapper(*args, **kwargs):
+
+        user_id_key = current_app.config["SESSION_USER_ID"]
 
         # Verifica se NÃO existe 'id_usuario' na sessão
         # Se não existe, significa que o usuário não está logado
-        if 'id_usuario' not in session:
+        if user_id_key not in session:
             flash('Faça login para acessar essa página.', 'error')
             return redirect(url_for('rotas_main.pagina_login'))
 
@@ -25,7 +27,7 @@ def login_required(f):
         return f(*args, **kwargs)
 
     # Retorna a função decorada
-    return decorated_function
+    return wrapper
 
 
 # =========================
@@ -33,15 +35,10 @@ def login_required(f):
 # =========================
 # Este decorator garante que apenas usuários ADMIN possam acessar a rota
 def admin_required(f):
-
     @wraps(f)
-    def decorated_function(*args, **kwargs):
+    @login_required
 
-        # Primeiro: verifica se o usuário está logado
-        if 'id_usuario' not in session:
-            flash('Faça login para acessar essa página.', 'error')
-
-            return redirect(url_for('rotas_main.pagina_login'))
+    def wrapper(*args, **kwargs):
 
         # Segundo: verifica se o tipo de usuário NÃO é admin 
         # session.get() evita erro caso a chave não exista
@@ -53,8 +50,8 @@ def admin_required(f):
         # a função original é executada normalmente
         return f(*args, **kwargs)
 
-    # Retorna a função decorada
-    return decorated_function
+
+    return wrapper
 
 """
 """

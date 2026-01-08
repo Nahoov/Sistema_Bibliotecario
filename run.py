@@ -1,5 +1,4 @@
 from app import criar_app
-from app import registrar_blueprints
 
 app = criar_app()
 
