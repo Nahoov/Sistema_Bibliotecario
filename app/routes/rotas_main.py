@@ -85,7 +85,10 @@ def processar_login():
     senha = (request.form.get('senha') or '').strip()
 
     if not email or not senha:
-        flash('Email ou senha inválidos', "error")
+        flash('Email ou senha inválidos', "danger")
+        flash('Teste info cayo en la primera no email o no senha', "info")
+        flash('Teste warning', "warning")
+        
         return redirect(url_for('rotas_main.pagina_login'))
 
     try:
@@ -94,14 +97,15 @@ def processar_login():
         usuario = cursorDict.fetchone()
 
         if not usuario:
-            flash('Email ou senha inválidos.', "error")
+            flash('Email ou senha inválidos. not usuario', "danger")
+            flash('Teste info', "info")
+            flash('Teste warning', "warning")
             return redirect(url_for('rotas_main.pagina_login'))
         
     
         senha_hash = usuario['senha_hash']
         tipo_usuario = usuario['tipo_usuario']
 
-        print(senha_hash)
         print("imprime tipo de usuario: ", tipo_usuario)
 
         ph.verify(senha_hash, senha)
@@ -120,10 +124,12 @@ def processar_login():
         else:
             return redirect(url_for('rotas_main.pagina_user'))
              
-        
+    #
     except (VerifyMismatchError, VerificationError):
             print(f"<<< Senha inválida >>>")
-            flash('Email ou senha inválidos.', "error")
+            flash('Email ou senha inválidos!', "danger")
+            flash('Teste info cayo en el verify mismatch', "info")
+            flash('Teste warning', "warning")
             return redirect(url_for('rotas_main.pagina_login'))
         
     

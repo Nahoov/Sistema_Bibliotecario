@@ -20,7 +20,7 @@ def login_required(f):
         # Verifica se NÃO existe 'id_usuario' na sessão
         # Se não existe, significa que o usuário não está logado
         if user_id_key not in session:
-            flash('Faça login para acessar essa página.', 'error')
+            flash('Faça login para acessar essa página.', "info")
             return redirect(url_for('rotas_main.pagina_login'))
 
         # Se o usuário estiver logado, a função original (rota) é executada normalmente
@@ -43,7 +43,7 @@ def admin_required(f):
         # Segundo: verifica se o tipo de usuário NÃO é admin 
         # session.get() evita erro caso a chave não exista
         if session.get('tipo_usuario') != 'admin':
-            flash('Acesso negado.', 'error')
+            flash('Acesso negado.', "warning")
             return redirect(url_for('rotas_main.pagina_user'))
 
         # Se o usuário estiver logado E for admin,
