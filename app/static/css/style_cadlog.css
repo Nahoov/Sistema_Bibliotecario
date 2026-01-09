@@ -5,29 +5,43 @@
     padding: 0;  
 }
 
+:root {
+    --verde: #BFDB38;
+    --rosa: #FA6868;
+    --laranja: #FAAC68;
+    --azul-esc: #04364A;
+}
+
 .header{
     height: 65px;   /* altura real do header */
     padding: 0 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    background: purple;
+    background: var(--azul-esc);
 
 }
 
 .nav-bar {
-    height: 50px;
     display: flex;
+    height: 50px;
+    width: 100%;
+    padding: 0% 1%;
     align-items: center;
-    background: blue;
+    justify-content: space-between;
     
 
 }
 
 nav img {
     max-height: 100%;
-    height: auto;
+    width: auto;
 }
 
 .cadastro {
-    background: brown;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+
 }
