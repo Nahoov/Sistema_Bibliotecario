@@ -8,7 +8,7 @@
     <title>{% block title %} Biblioteca {% endblock %}</title>
 
      <!--Para colocar a logo na aba da página-->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/livro_caneca.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/entrada_biblioteca.png') }}">
 
     <!--Para colocar css nas páginas filhos-->
     {% block css %}
@@ -23,7 +23,7 @@
     <!--O header inteiro é opcional.-->
     {% block header %}
         <header class="header">
-            <nav>
+            <nav class="nav-bar">
                 {% block header_img %}
                     <!--forma padrão do flask para não quebrar a aplicação caso a url mude-->
                     <img src="{{ url_for('static', filename='img/default.png') }}" alt="Logo padrão">
