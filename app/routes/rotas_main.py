@@ -73,7 +73,7 @@ def processar_cadastro():
         return redirect(url_for('rotas_main.pagina_login'), code=303)
     
     except Exception as e:
-        return f"[ERROR - Final cadastro] | {e}", 500
+        return f"[ERROR] | {e}", 500
     
 
 
@@ -128,8 +128,12 @@ def processar_login():
     except (VerifyMismatchError, VerificationError):
             print(f"<<< Senha inválida >>>")
             flash('Email ou senha inválidos!', "danger")
-            flash('Teste info cayo en el verify mismatch', "info")
-            flash('Teste warning', "warning")
             return redirect(url_for('rotas_main.pagina_login'))
-        
-    
+
+
+@rotas_bp.post('/logout')
+@login_required
+def logout():
+    session.clear()  # remove tudo da sessão
+    flash("Você saiu do sistema.", "info")
+    return redirect(url_for('rotas_main.pagina_login'))

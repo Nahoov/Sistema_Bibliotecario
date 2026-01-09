@@ -2,7 +2,9 @@ from flask import Flask
 
 def registrar_blueprints(app):
     from .routes.rotas_main import rotas_bp
+    from .routes.rotas_admin import rotas_bp_admin
     app.register_blueprint(rotas_bp)
+    app.register_blueprint(rotas_bp_admin)
 
 def criar_app():
     app = Flask(__name__, instance_relative_config=False)
