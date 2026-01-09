@@ -86,8 +86,6 @@ def processar_login():
 
     if not email or not senha:
         flash('Email ou senha inválidos', "danger")
-        flash('Teste info cayo en la primera no email o no senha', "info")
-        flash('Teste warning', "warning")
         
         return redirect(url_for('rotas_main.pagina_login'))
 
@@ -97,9 +95,7 @@ def processar_login():
         usuario = cursorDict.fetchone()
 
         if not usuario:
-            flash('Email ou senha inválidos. not usuario', "danger")
-            flash('Teste info', "info")
-            flash('Teste warning', "warning")
+            flash('Email ou senha inválidos', "danger")
             return redirect(url_for('rotas_main.pagina_login'))
         
     

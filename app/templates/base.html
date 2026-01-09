@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!--Para colocar poder escolher o titulo em cada página filho-->
     <title>{% block title %} Biblioteca {% endblock %}</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+
+     <!--Para colocar a logo na aba da página-->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/livro_caneca.png') }}">
+
+    <!--Para colocar css nas páginas filhos-->
+    {% block css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"> 
+    {% endblock %}
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
+    <!--O header inteiro é opcional.-->
+    {% block header %}
+        <header class="header">
+            <nav>
+                {% block header_img %}
+                    <!--forma padrão do flask para não quebrar a aplicação caso a url mude-->
+                    <img src="{{ url_for('static', filename='img/default.png') }}" alt="Logo padrão">
+                {% endblock %}
+            </nav>
+        </header>
+    {% endblock %}
+
+
 
     <!-- FLASH MESSAGES -->
     <div class="container mt-3">
@@ -30,6 +52,7 @@
     <!-- CONTEÚDO DAS PÁGINAS -->
     <div class="container mt-4">
         {% block conteudo %}
+
         {% endblock %}
     </div>
 

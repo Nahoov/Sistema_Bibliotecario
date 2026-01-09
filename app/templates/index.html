@@ -3,8 +3,14 @@
 {% block title %} Biblioteca | Cadastro {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('style', filename='css/style_cadlog.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cadlog.css') }}">
 {% endblock %}
+
+
+{% block header_img %}
+    <img src="{{ url_for('static', filename='img/logo_biblioteca.png') }}" id="img-teste" alt="Logo biblioteca">
+{% endblock %}
+
 
 {% block conteudo %}
     <h1 class="titulo_principal">Iniciemos seu cadastro</h1>
