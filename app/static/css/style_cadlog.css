@@ -12,6 +12,13 @@
     --azul-esc: #04364A;
 }
 
+/* PÁGINA CADASTRO PRINCIPAL */
+
+body {
+    min-height: 100vh;
+    /*background: var(--laranja);*/
+}
+
 .header{
     height: 65px;   /* altura real do header */
     padding: 0 20px;
@@ -20,6 +27,13 @@
     align-items: center;
     background: var(--azul-esc);
 
+}
+
+#link_ancora {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
 }
 
 .nav-bar {
@@ -33,15 +47,80 @@
 
 }
 
-nav img {
+/*nav img {
     max-height: 100%;
     width: auto;
+} */
+
+.titulo_principal {
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    color:black;
+
 }
 
-.cadastro {
+.container-conteudo-cadastro {
+    position: relative;
     display: flex;
     align-items: center;
-    flex-direction: column;
     
+}
+
+#imagem {
+    position: absolute;
+}
+
+#imagem img {
+    width: 220px;
+}
+
+
+.container-cadastro {
+    
+    width: 550px;
+    padding: 1%;
+    margin: 0% auto;
+    border: none;
+    border-radius: 9%;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    background: var(--verde);
+}
+
+
+.container_sessao {
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+}
+
+input {
+    border-radius: 5%;
+}
+
+.botao_cadastrar {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
 
 }
+
+#botao {
+    border-radius: 5%;
+}
+
+.btn-cadastro {
+    background-color: #04364A;
+    border-color: #04364A;
+}
+
+
+
+/* Pagina login (algumas coisas diferentes) */

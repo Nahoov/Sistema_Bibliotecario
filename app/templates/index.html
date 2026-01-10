@@ -8,57 +8,61 @@
 
 
 {% block header_img %}
-    <img src="{{ url_for('static', filename='img/entrada_biblioteca.png') }}" alt="Logo biblioteca">
-    <a href="/login_biblioteca">Logar</a>
+    <a href="/login_biblioteca" id="link_ancora"> Já tenho conta </a>
 {% endblock %}
 
 
 {% block conteudo %}
     <h1 class="titulo_principal">Iniciemos seu cadastro</h1>
 
-    <div class="cadastro">
-        <form action="/cadastrar" method="POST">
+    <div class="container-conteudo-cadastro">
 
-            <div class="container_sessao">
-                <label for="nome">Nome</label><br>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" minlength="2" required>
-            </div>
+        <a href="/" id="imagem">
+            <img src="{{ url_for('static', filename='img/entrada_biblioteca.png') }}" alt="Logo biblioteca">
+        </a>
 
-            <div class="container_sessao">
-                <label for="sobrenome">Sobrenome</label><br>
-                <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" minlength="2" required>
-            </div>
-
-            <div class="container_sessao">
-                <label for="email">Email</label><br>
-                <input type="email" id="email" name="email" placeholder="Digite seu email" minlength="11" required>
-            </div>
-
-            <div class="container_sessao">
-                <label for="data_nascimento">Data de nascimento</label><br>
-                <input type="date" id="data_nascimento" name="data_nascimento" placeholder="dd/mm/aaaa" required>
-
-            </div>
+        <div class="container-cadastro">
             
-            <div class="container_sessao">
-                <label for="senha">Senha</label><br>
-                <input type="password" id="senha" name="senha" placeholder="Digite uma senha" minlength="8" required>
-            </div>
+            <form action="/cadastrar" method="POST" class="formulario">
 
-            <div clas="container_sessao">
-                <label for="confirmar_senha">Repita sua senha</label><br>
-                <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite novamente sua senha" 
-                minlength="8" required>
-            </div class="container_sessao">
+                <div class="container_sessao">
+                    <label for="nome">Nome</label><br>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" minlength="2" required>
+                </div>
 
-            <div class="botao_cadastrar">
-                <button type="submit">Cadastrar</button>
-            </div>
+                <div class="container_sessao">
+                    <label for="sobrenome">Sobrenome</label><br>
+                    <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" minlength="2" required>
+                </div>
 
-        </form>
-    </div>
+                <div class="container_sessao">
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email" minlength="11" required>
+                </div>
 
-    <div class="link_login">
-        <a href="/login_biblioteca">Já tenho conta</a>
+                <div class="container_sessao">
+                    <label for="data_nascimento">Data de nascimento</label><br>
+                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="dd/mm/aaaa" required>
+
+                </div>
+                
+                <div class="container_sessao">
+                    <label for="senha">Senha</label><br>
+                    <input type="password" id="senha" name="senha" placeholder="Digite uma senha" minlength="8" required>
+                </div>
+
+                <div class="container_sessao">
+                    <label for="confirmar_senha">Repita sua senha</label><br>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite novamente sua senha" 
+                    minlength="8" required>
+                </div>
+
+                <div class="botao_cadastrar">
+                    <button type="submit" class="btn btn-light btn-lg">Cadastrar</button>
+                </div>
+
+            </form>
+        </div>
+
     </div>
 {% endblock %}
